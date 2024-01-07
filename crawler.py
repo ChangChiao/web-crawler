@@ -44,10 +44,16 @@ def send_email(subject, body):
 def track_product():
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
+    body_content = soup.body
+    print(f'soup: {body_content}')
 
-    product_elements = soup.find_all('div', text=lambda text: text and target_product in text)  
-    if product_name:
+    product_elements = soup.body.find_all('div', string=target_product)  
+    if product_elements:
+        print(f'fetch success')
         send_email("商品通知", f"{target_product}已經推出！")
+    else:
+        print('Product not found')
+
 
 if __name__ == "__main__":
     track_product()
