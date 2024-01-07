@@ -1,20 +1,24 @@
 import requests
 from bs4 import BeautifulSoup
 import smtplib
+from dotenv import load_dotenv
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
+load_dotenv()
+
+
 # target
-url = ""
+url =  os.getenv('GOODS_URL')
 
 # product name
-target_product = ""
+target_product = "FC660M"
 
 # email
-email_sender = ""
-email_password = ""
+email_sender = os.getenv('EMAIL_USER')
+email_password = os.getenv('EMAIL_PASSWORD')
 
-email_receiver = ""
+email_receiver = os.getenv('EMAIL_RECEIVER')
 
 def send_email(subject, body):
     msg = MIMEMultipart()
