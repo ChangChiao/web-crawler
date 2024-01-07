@@ -19,8 +19,8 @@ load_dotenv()
 url =  os.getenv('GOODS_URL')
 
 # product name
-# target_product = "FC660M"
-target_product = "FC980M"
+target_product = "FC660M"
+target_product2 = "FC660C"
 
 # email
 email_sender = os.getenv('EMAIL_USER')
@@ -40,7 +40,6 @@ def send_email(subject, body):
         server_res = server.ehlo()
         print(f'res 1==> {server_res}')
         
-        print("%" * 100)
         try:
             smtp_ttls = server.starttls()
             print(f'smtp_ttls ==> {smtp_ttls}')
@@ -74,7 +73,7 @@ def track_product():
     # time.sleep(3)
 
     try:
-        element = driver.find_element(By.XPATH,"//a[contains(text(),'"+target_product+"')]")
+        element = driver.find_element(By.XPATH,"//a[contains(text(),'"+target_product+"') or contains(text(),'"+target_product2+"')]")
         print(f'fetch success')
         send_email("商品通知", f"{target_product}已經推出！")
 
@@ -84,7 +83,7 @@ def track_product():
     finally:
         driver.quit()
 
-    # button = driver.find_element(By.XPATH, "//span[contains(text(),'韓國 Leopold']")
+    # button = driver.find_element(By.XPATH, "//span[contains(text(),'Leopold']")
     # print(f'button==> {button}')
 
 
