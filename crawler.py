@@ -1,7 +1,8 @@
 import os
-import smtplib
+import smtplib, ssl
 import requests
 import time
+import sys
 from dotenv import load_dotenv
 from bs4 import BeautifulSoup
 from email.mime.text import MIMEText
@@ -33,20 +34,25 @@ def send_email(subject, body):
     msg['To'] = email_receiver
     msg['Subject'] = subject
     msg.attach(MIMEText(body, 'plain'))
+    
 
     with smtplib.SMTP('smtp.gmail.com', 587) as server:
         server_res = server.ehlo()
         print(f'res 1==> {server_res}')
         
-        server.starttls()
-        print(f'start tls ==> {smtp_ttls}')
-        
-        server.login(email_sender, email_password)
-        print(f'SMTP login ==> {smtp_login}')
+        print("%" * 100)
+        try:
+            smtp_ttls = server.starttls()
+            print(f'smtp_ttls ==> {smtp_ttls}')
 
-        server.sendmail(email_sender, email_receiver, msg.as_string())
+            smtp_login = server.login(email_sender, email_password)
+            print(f'SMTP login ==> {smtp_login}')
 
-        server.quit()
+            server.sendmail(email_sender, email_receiver, msg.as_string())
+        except:
+            print( "Unexpected error:", sys.exc_info()[0])
+        finally:
+            server.quit()
 
 # def track_product():
 #     response = requests.get(url)
@@ -65,12 +71,12 @@ def track_product():
     driver = webdriver.Chrome()
     print("=" * 100)
     driver.get(url)
-    time.sleep(10)
+    # time.sleep(3)
 
     try:
         element = driver.find_element(By.XPATH,"//a[contains(text(),'"+target_product+"')]")
         print(f'fetch success')
-        # send_email("商品通知", f"{target_product}已經推出！")
+        send_email("商品通知", f"{target_product}已經推出！")
 
     except:
         print('Product not found')
