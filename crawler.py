@@ -1,7 +1,8 @@
-import requests
-from bs4 import BeautifulSoup
+import os
 import smtplib
+import requests
 from dotenv import load_dotenv
+from bs4 import BeautifulSoup
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
@@ -28,20 +29,25 @@ def send_email(subject, body):
     msg.attach(MIMEText(body, 'plain'))
 
     with smtplib.SMTP('smtp.gmail.com', 587) as server:
+        server_res = server.ehlo()
+        print(f'res 1==> {server_res}')
+        
         server.starttls()
+        print(f'start tls ==> {smtp_ttls}')
+        
         server.login(email_sender, email_password)
+        print(f'SMTP login ==> {smtp_login}')
+
         server.sendmail(email_sender, email_receiver, msg.as_string())
 
+        server.quit()
 def track_product():
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
 
-    product_elements = soup.find_all('div', class_='product')  
-    for product_element in product_elements:
-        product_name = product_element.find('span', class_='product-name').text  
-
-        if target_product in product_name:
-            send_email("商品通知", f"{target_product}已經推出！")
+    product_elements = soup.find_all('div', text=lambda text: text and target_product in text)  
+    if product_name:
+        send_email("商品通知", f"{target_product}已經推出！")
 
 if __name__ == "__main__":
     track_product()
