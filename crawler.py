@@ -19,7 +19,8 @@ load_dotenv()
 url =  os.getenv('GOODS_URL')
 
 # product name
-target_product = "FC660M"
+# target_product = "FC660M"
+target_product = "FC980M"
 target_product2 = "FC660C"
 
 # email
