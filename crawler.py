@@ -70,7 +70,7 @@ def track_product():
     driver = webdriver.Chrome()
     print("=" * 100)
     driver.get(url)
-    # time.sleep(3)
+    time.sleep(10)
 
     try:
         element = driver.find_element(By.XPATH,"//a[contains(text(),'"+target_product+"') or contains(text(),'"+target_product2+"')]")
