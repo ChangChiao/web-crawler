@@ -15,10 +15,13 @@ jobs:
         with:
           python-version: 3.x
       - name: Install dependencies
-        run: python3 -m pip3 install --upgrade pip3 setuptools wheel
+        run: python -m pip install --upgrade
+          pip install poetry
+          poetry install
+          poetry add requests
 
       - name: Display Python version
-        run: python3 -c "import sys; print(sys.version)"
+        run: python -c "import sys; print(sys.version)"
 
       - name: Run Python Script
         env:
@@ -27,4 +30,4 @@ jobs:
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
           EMAIL_RECEIVER: ${{ secrets.EMAIL_RECEIVER }}
         run: |
-          python3 crawler.py
+          python crawler.py
