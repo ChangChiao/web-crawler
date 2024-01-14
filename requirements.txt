@@ -3,7 +3,7 @@ charset-normalizer==3.3.2
 idna==3.6
 powerline-status==2.7
 requests==2.31.0
-urllib3==3.0.0
+urllib3==2.1.0
 beautifulsoup4==4.10.0
 bs4==0.0.1
 python-dotenv==1.0.0
