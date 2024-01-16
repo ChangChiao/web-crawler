@@ -25,9 +25,9 @@ jobs:
 
       - name: Run Python Script
         env:
-          GOODS_URL: ${{ secrets.GOODS_URL }}
-          EMAIL_USER: ${{ secrets.EMAIL_USER }}
-          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
-          EMAIL_RECEIVER: ${{ secrets.EMAIL_RECEIVER }}
+          GOODS_URL: ${{ env.GOODS_URL }}
+          EMAIL_USER: ${{ env.EMAIL_USER }}
+          EMAIL_PASSWORD: ${{ env.EMAIL_PASSWORD }}
+          EMAIL_RECEIVER: ${{ env.EMAIL_RECEIVER }}
         run: |
           python crawler.py
