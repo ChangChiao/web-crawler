@@ -26,7 +26,7 @@ jobs:
         run: sudo apt install -y chromium-browser
 
       - name: Install all necessary packages
-        run: pip3 install requests beautifulsoup4 webdriver selenium dotenv
+        run: pip3 install requests beautifulsoup4 selenium dotenv
       # - name: Install dependencies
       #   ##  for Python 3 => pip3 freeze > requirements.txt
       #   run: |
