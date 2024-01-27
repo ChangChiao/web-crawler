@@ -8,13 +8,14 @@ from bs4 import BeautifulSoup
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 
 
 
-chrome_options = Options()
-chrome_options.add_argument("--headless")
-chrome_options.add_argument('--no-sandbox')
+options = webdriver.ChromeOptions()
+options.add_argument("--headless")
+options.add_argument('--disable-dev-shm-usage')
+options.add_argument("--no-sandbox")
+
 
 
 
@@ -74,7 +75,7 @@ def send_email(subject, body):
 #         print('Product not found')
 
 def track_product():
-    driver = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver', options=chrome_options)
+    driver = webdriver.Chrome(options=options)
     print("=" * 100)
     driver.get(url)
     time.sleep(10)
