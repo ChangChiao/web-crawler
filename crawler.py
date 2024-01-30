@@ -75,7 +75,7 @@ def send_email(subject, body):
 #         print('Product not found')
 
 def track_product():
-    driver = webdriver.Chrome(ChromeDriverManager().install())
+    driver = webdriver.Chrome(ChromeDriverManager(version='121.0.6167.85').install())
     print("=" * 100)
     driver.get(url)
     time.sleep(10)
