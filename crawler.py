@@ -8,7 +8,9 @@ from bs4 import BeautifulSoup
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+
 
 
 options = webdriver.ChromeOptions()
@@ -75,7 +77,8 @@ def send_email(subject, body):
 #         print('Product not found')
 
 def track_product():
-    driver = webdriver.Chrome(executable_path=ChromeDriverManager(version='121.0.6167.85').install())
+    service = Service(executable_path=ChromeDriverManager(version='121.0.6167.85').install())
+    driver = webdriver.Chrome(server=server, options=options)
     print("=" * 100)
     driver.get(url)
     time.sleep(10)
