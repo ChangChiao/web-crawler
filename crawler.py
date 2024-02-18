@@ -74,7 +74,7 @@ def send_email(subject, body):
 #         print(f'fetch success')
 #         # send_email("商品通知", f"{target_product}已經推出！")
 #     else:
-#         print('Product not found')
+#      ical://occurrence/4A011A37-31E5-44E9-B17A-C4D6E34B2B81?method=show&options=more   print('Product not found')
 
 def track_product():
     service = Service(executable_path=ChromeDriverManager(version='121.0.6167.85').install())
