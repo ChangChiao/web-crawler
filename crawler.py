@@ -77,7 +77,7 @@ def send_email(subject, body):
 #      ical://occurrence/4A011A37-31E5-44E9-B17A-C4D6E34B2B81?method=show&options=more   print('Product not found')
 
 def track_product():
-    service = Service(executable_path=ChromeDriverManager(version='121.0.6167.85').install())
+    service = Service(executable_path=ChromeDriverManager().install())
     driver = webdriver.Chrome(server=server, options=options)
     print("=" * 100)
     driver.get(url)
