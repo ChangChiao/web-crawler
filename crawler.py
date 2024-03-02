@@ -10,6 +10,8 @@ from email.mime.multipart import MIMEMultipart
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.utils import ChromeType
+
 
 
 
@@ -77,7 +79,7 @@ def send_email(subject, body):
 #      ical://occurrence/4A011A37-31E5-44E9-B17A-C4D6E34B2B81?method=show&options=more   print('Product not found')
 
 def track_product():
-    service = Service(executable_path=ChromeDriverManager().install())
+    service = Service(executable_path=ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install())
     driver = webdriver.Chrome(server=server, options=options)
     print("=" * 100)
     driver.get(url)
